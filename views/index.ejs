@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('nav.ejs') %>
+    <div class="container">
+        <h1>Welcome, To Your Tasks</h1>
+        <h3> Mr <%= user.username %></h3>
+    
+        <div class="task-list">
+            <% tasks.forEach(task => { %>
+                <div class="task-item <%= task.completed ? 'completed' : '' %>">
+                    <p><%= task.title %> - <%= task.completed ? 'Completed' : 'Not Completed' %></p>
+                    <% if (!task.completed) { %>
+                        <form action="/tasks/<%= task._id %>/complete" method="POST">
+                            <button type="submit" class="complete-btn">Completed</button>
+                        </form>
+                    <% } %>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+    <a href="/addtask" class="addtask">Add Task</a>
+    
+</body>
+</html>
